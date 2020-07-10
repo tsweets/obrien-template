@@ -1,0 +1,150 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul th:fragment="menu" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-rocket"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">O'Brien Template</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+
+    <li id="nav-item-components" class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-components" aria-expanded="true" aria-controls="collapse-components">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Components</span>
+        </a>
+        <div id="collapse-components" class="collapse" aria-labelledby="heading-components" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Custom Components:</h6>
+                <a id="collapse-item-components-buttons" class="collapse-item" href="page-buttons">Buttons</a>
+                <a id="collapse-item-components-cards" class="collapse-item" href="page-cards">Cards</a>
+                <a id="collapse-item-components-typeahead" class="collapse-item" href="page-typeahead">Type Ahead</a>
+
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+  <!--  <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Utilities</span>
+        </a>
+        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Custom Utilities:</h6>
+                <a class="collapse-item" href="utilities-color.html">Colors</a>
+                <a class="collapse-item" href="utilities-border.html">Borders</a>
+                <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                <a class="collapse-item" href="utilities-other.html">Other</a>
+            </div>
+        </div>
+    </li>-->
+
+
+    <!-- Nav Item - Bootstrap Collapse Menu -->
+    <li id="nav-item-bootstrap" class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-bootstrap" aria-expanded="true" aria-controls="collapse-bootstrap">
+            <i class="fab fa-bootstrap"></i>
+            <span>Bootstrap</span>
+        </a>
+        <div id="collapse-bootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Elements:</h6>
+                <a id="collapse-item-bootstrap-buttons" class="collapse-item" href="page-bs-buttons">Buttons</a>
+                <a id="collapse-item-bootstrap-typography" class="collapse-item" href="page-bs-typography">Typography</a>
+                <a id="collapse-item-bootstrap-tables" class="collapse-item" href="page-bs-tables">Tables</a>
+                <a id="collapse-item-bootstrap-forms" class="collapse-item" href="page-bs-forms">Forms</a>
+                <a id="collapse-item-bootstrap-navigation" class="collapse-item" href="page-bs-navs">Navigation</a>
+                <a id="collapse-item-bootstrap-indicators" class="collapse-item" href="page-bs-indicators">Indicators</a>
+                <a id="collapse-item-bootstrap-progress" class="collapse-item" href="page-bs-progress">Progress</a>
+                <a id="collapse-item-bootstrap-containers" class="collapse-item" href="page-bs-containers">Containers</a>
+                <a id="collapse-item-bootstrap-dialogs" class="collapse-item" href="page-bs-dialogs">Dialogs</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Addons
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li id="nav-item-pages" class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse-pages" aria-expanded="true" aria-controls="collapse-pages">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>Pages</span>
+        </a>
+        <div id="collapse-pages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Login Screens:</h6>
+                <a id="collapse-item-pages-login" class="collapse-item" href="page-login">Login</a>
+             <!--   <a class="collapse-item" href="register.html">Register</a>
+                <a class="collapse-item" href="forgot-password.html">Forgot Password</a> -->
+                <div class="collapse-divider"></div>
+                <h6 class="collapse-header">Other Pages:</h6>
+                <a id="collapse-item-pages-404" class="collapse-item" href="/page-404">404 Page</a>
+                <a id="collapse-item-pages-blank" class="collapse-item" href="/page-blank">Blank Page</a>
+            </div>
+        </div>
+    </li>
+
+
+    <!-- Nav Item - Tables -->
+    <li id="nav-item-tables" class="nav-item">
+        <a class="nav-link" href="/page-tables">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Tables</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        About
+    </div>
+
+    <!-- Nav Item - UI Info -->
+    <li id="nav-item-ui-components" class="nav-item">
+        <a class="nav-link" href="/page-about">
+            <i class="fas fa-fw fa-code-branch"></i>
+            <span>Versions</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{portal-layout}">
+
+<section layout:fragment="work">
+
+    <h1 class="h3 mb-2 text-gray-800">Typeahead Search</h1>
+
+    <div class="row">
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Basic usage<br><small>Typeahead jQuery plugin, requires to pass to the plugin method one or more datasets. The source of a dataset is responsible for computing a set of suggestions for a given query.</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="the-basics">
+                                <input class="typeahead form-control" type="text" placeholder="States of USA">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Bloodhound (Suggestion Engine)<br><small>Bloodhound is robust, flexible, and offers advanced functionalities such as prefetching, intelligent caching, fast lookups, and backfilling with remote data.</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="bloodhound">
+                                <input class="typeahead form-control" type="text" placeholder="States of USA">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- row-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Prefetch<br><small>Prefetched data is fetched and processed on initialization. If the browser supports local storage, the processed data will be cached there to prevent additional network requests.</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="prefetch">
+                                <input class="typeahead form-control" type="text" placeholder="Countries">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Default Suggestions<br><small>Default suggestions can be shown for empty queries by setting the minLength option to 0 and having the source return suggestions for empty queries.</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="default-suggestions">
+                                <input class="typeahead form-control" type="text" placeholder="NFL Teams">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- row-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Multiple Datasets with Custom Templates<br><small>Mix different datasets and use custom templates</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="multiple-datasets">
+                                <input class="typeahead form-control" type="text" placeholder="NBA and NHL teams">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card shadow mb-4">
+                        <div class="card-header">
+                            Scrollable Dropdown Menu<br><small>Is possible to scroll content by limiting the max-height of the Typeahead dropdown via CSS.</small>
+                        </div>
+                        <div class="card-body">
+                            <div id="scrollable-dropdown-menu">
+                                <input class="typeahead form-control" type="text" placeholder="Countries">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+</section>
+<section layout:fragment="extra-js">
+    <script src="js/typeahead/typeahead.jquery.js"></script>
+    <script src="js/typeahead/typeahead.bundle.js"></script>
+    <script src="js/typeahead/bloodhound.js"></script>
+
+
+    <script type="text/javascript">
+        sideNavPageActivate('components', 'typeahead')
+    </script>
+
+    <script type="text/javascript">
+        (function() {
+            'use strict';
+
+            $(initTypeahead);
+
+            function initTypeahead() {
+
+                if (!$.fn.typeahead) return;
+
+                // BASIC EXAMPLE
+                // ----------------------
+
+                var substringMatcher = function(strs) {
+                    return function findMatches(q, cb) {
+                        var matches, substrRegex;
+
+                        // an array that will be populated with substring matches
+                        matches = [];
+
+                        // regex used to determine if a string contains the substring `q`
+                        substrRegex = new RegExp(q, 'i');
+
+                        // iterate through the pool of strings and for any string that
+                        // contains the substring `q`, add it to the `matches` array
+                        $.each(strs, function(i, str) {
+                            if (substrRegex.test(str)) {
+                                matches.push(str);
+                            }
+                        });
+
+                        cb(matches);
+                    };
+                };
+
+                var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+                    'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+                    'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+                    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+                    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+                    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+                    'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+                    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+                    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+                ];
+
+                $('#the-basics .typeahead').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                }, {
+                    name: 'states',
+                    source: substringMatcher(states)
+                });
+
+
+                // BLOODHOUND EXAMPLE
+                // ----------------------
+                // constructs the suggestion engine
+                var bStates = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    // `states` is an array of state names defined in "The Basics"
+                    local: states
+                });
+
+                $('#bloodhound .typeahead').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 1
+                }, {
+                    name: 'states',
+                    source: bStates
+                });
+
+
+                // PREFETCH EXAMPLE
+                // ----------------------
+                var countries = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    // url points to a json file that contains an array of country names, see
+                    // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+                    prefetch: 'demo/typeahead-countries.json'
+                });
+
+                // passing in `null` for the `options` arguments will result in the default
+                // options being used
+                $('#prefetch .typeahead').typeahead(null, {
+                    name: 'countries',
+                    source: countries
+                });
+
+
+                // DEFAULT SUGGESTION EXAMPLE
+                // ----------------------------
+                var nflTeams = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    identify: function(obj) {
+                        return obj.team;
+                    },
+                    prefetch: 'demo/typeahead-nfl.json'
+                });
+
+                function nflTeamsWithDefaults(q, sync) {
+                    if (q === '') {
+                        sync(nflTeams.get('Detroit Lions', 'Green Bay Packers', 'Chicago Bears'));
+                    } else {
+                        nflTeams.search(q, sync);
+                    }
+                }
+
+                $('#default-suggestions .typeahead').typeahead({
+                    minLength: 0,
+                    highlight: true
+                }, {
+                    name: 'nfl-teams',
+                    display: 'team',
+                    source: nflTeamsWithDefaults
+                });
+
+
+                // MULTIPLE DATASET & CUSTOM TEMPLATE
+                // ------------------------------------
+                var nbaTeams = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    prefetch: 'demo/typeahead-nba.json'
+                });
+
+                var nhlTeams = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('team'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    prefetch: 'demo/typeahead-nhl.json'
+                });
+
+                $('#multiple-datasets .typeahead').typeahead({
+                    highlight: true
+                }, {
+                    name: 'nba-teams',
+                    display: 'team',
+                    source: nbaTeams,
+                    templates: {
+                        header: '<h3 class="league-name">NBA Teams</h3>'
+                    }
+                }, {
+                    name: 'nhl-teams',
+                    display: 'team',
+                    source: nhlTeams,
+                    templates: {
+                        header: '<h3 class="league-name">NHL Teams</h3>'
+                    }
+                });
+
+                // SCROLLABLE EXAMPLE
+                // -------------------
+                $('#scrollable-dropdown-menu .typeahead').typeahead(null, {
+                    name: 'countries',
+                    limit: 10,
+                    source: countries
+                });
+
+            }
+
+        })();
+    </script>
+
+</section>
+</html>

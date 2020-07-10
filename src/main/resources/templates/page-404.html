@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{portal-layout}">
+
+<section layout:fragment="work">
+    <!-- 404 Error Text -->
+    <div class="text-center">
+        <p class="display-1">404</p>
+        <p class="lead text-gray-800 mb-5">Page Not Found</p>
+
+
+        <img class="img-fluid" src="img/DevOpsMascot.png"/>
+        <p class="text-gray-500 mb-0 display-3">Oh boy, looks like we got too busy putting out fires to create that page</p>
+        <a href="/dashboard"><i class="fa fa-backward"></i> Back to Dashboard</a>
+    </div>
+
+</section>
+<section layout:fragment="extra-js">
+    <script type="text/javascript">
+        sideNavPageActivate('pages', '404')
+    </script>
+</section>
+</html>
