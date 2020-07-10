@@ -4,7 +4,7 @@
 - Can use this site to download Google Web Fonts https://google-webfonts-helper.herokuapp.com/fonts
 
 # Docker Build
-mvn clean compile jib:dockerBuild
+mvn clean compile package dockerfile:build 
 
 Environment Vars
 
